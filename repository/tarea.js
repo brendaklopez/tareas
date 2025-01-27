@@ -13,3 +13,13 @@ export const getTareasRepository = async () => {
     }    
 }
 
+export const agregarTareaRepository = async (nuevaTarea) => {
+    try {
+        const tareaNueva = new Tarea(nuevaTarea);
+        await tareaNueva.save();
+        console.log(tareaNueva)
+    } catch (error) {
+        console.log('Error en el Repositorio', error);
+        throw new Error('Error al agregar la tarea: ' + id + 'a la base de datos');
+    }
+}

@@ -1,16 +1,18 @@
-import { getTareasServices } from "../services/tarea.js";
+import { getTareasServices, agregarTareaServices } from "../services/tarea.js";
+import mongoose from 'mongoose';
 // Crear una nueva tarea
-/*
-export const crearTarea = async (req, res) => {
+
+export const agregarTareaController = async (req, res) => {
+    const tarea = req.body;
     try {
-        const { titulo, descripcion } = req.body;
-        const nuevaTarea = new Tarea({ titulo, descripcion });
-        const tareaGuardada = await nuevaTarea.save();
-        res.status(201).json(tareaGuardada);
+       const tareaNueva = await agregarTareaServices(tarea);
+       return res.status(201).send({mensaje: 'Usuario agregado correctamente', Tarea: tareaNueva})
+        
     } catch (error) {
-        res.status(500).json({ mensaje: 'Error al crear la tarea', error });
+        console.error(error);
+        return res.status(500).send({mensaje: 'Error al agregar al usuario'});
     }
-};*/
+};
 
 // Obtener todas las tareas
 export const getTareasController = async (req, res) => {
@@ -19,7 +21,7 @@ export const getTareasController = async (req, res) => {
         if (tareas.length === 0) {
             return res.status(200).send('La bbdd esta vacia');
         }
-        return res.statis(200).send(tareas);
+        return res.status(200).send(tareas);
     } catch (error) {
         console.error(error);
         res.status(500).json({ mensaje: 'Error al obtener tareas', error });

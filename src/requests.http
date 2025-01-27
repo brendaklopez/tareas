@@ -5,3 +5,11 @@
 GET {{api}}/tareas
 
 ########
+POST {{api}}/tareas
+Content-Type: application/json
+
+{
+    "titulo": "Aprender Node.js",
+    "descripcion": "Revisar conceptos básicos de Node.js y Express",
+    "completo": false
+}

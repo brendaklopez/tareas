@@ -13,3 +13,13 @@ Content-Type: application/json
     "descripcion": "Revisar conceptos básicos de Node.js y Express",
     "completo": false
 }
+
+####
+PUT {{api}}/tareas/6796d48044957b847
+Content-Type: application/json
+
+{
+    "titulo": "Aprender Node.js",
+    "descripcion": "Revisar conceptos básicos de Node.js y Express",
+    "completo": true
+}

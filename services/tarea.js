@@ -1,4 +1,4 @@
-import { getTareasRepository, agregarTareaRepository } from "../repository/tarea.js";
+import { getTareasRepository, agregarTareaRepository, editarTareaRepository } from "../repository/tarea.js";
 
 export const getTareasServices = async () => {
     try {
@@ -17,5 +17,14 @@ export const agregarTareaServices = async (tarea) => {
     } catch (error) {
         console.error('Error : ', error);
         throw new Error('Error al aregegar la tarea nueva');
+    }
+}
+
+export const editarTareaService = async (id, tarea) => {
+    try {
+        return editarTareaRepository(id,tarea);
+    } catch (error) {
+        console.error('Error en el service', error);
+        throw new Error('Error al editar la tarea');  
     }
 }

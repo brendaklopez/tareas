@@ -23,3 +23,21 @@ export const agregarTareaRepository = async (nuevaTarea) => {
         throw new Error('Error al agregar la tarea: ' + id + 'a la base de datos');
     }
 }
+
+export const editarTareaRepository = async (id, tarea) => {
+    try {
+        const tareaEditada = await Tarea.findByIdAndUpdate(id, tarea, { new: true});
+        if(!tareaEditada){
+            console.log('Tarea no encontrada');
+
+        }else{
+            console.log('Se edito la tarea: '+ id+ 'en la lista');
+            console.log(tareaEditada);
+            return tareaEditada;
+        }
+    } catch (error) {
+        console.log('Error en el repositorio', error);
+        throw new Error('Error al editar la tarea: ' + id + 'en la base de datos');
+    }
+    
+}

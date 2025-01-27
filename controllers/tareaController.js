@@ -1,4 +1,5 @@
-import { getTareasServices, agregarTareaServices } from "../services/tarea.js";
+import { Tarea } from "../repository/models/tarea.js";
+import { getTareasServices, agregarTareaServices, editarTareaService } from "../services/tarea.js";
 import mongoose from 'mongoose';
 // Crear una nueva tarea
 
@@ -27,17 +28,24 @@ export const getTareasController = async (req, res) => {
         res.status(500).json({ mensaje: 'Error al obtener tareas', error });
     }
 };
-/*  Actualizar una tarea
-export const actualizarTarea = async (req, res) => {
+
+export const editarTareaController = async (req, res) => {
+    const { id } = req.params;
+    const tarea = req.body;
+    if(!mongoose.Types.ObjectId.isValid(id)){
+        return res.status(400).json({mesanje: 'ID invalido'});
+    }
     try {
-        const { id } = req.params;
-        const tareaActualizada = await Tarea.findByIdAndUpdate(id, req.body, { new: true });
-        res.status(200).json(tareaActualizada);
+       const tareaActualizada = await editarTareaService(id,tarea);
+       if(!tareaActualizada){
+        return res.status(404).send({ mensaje: `No se encontró ninguna tarea con ID ${id}`})
+       }
+        return res.status(200).send({ mensaje: 'La tarea ha sido editada correctamente', Tarea: tareaActualizada });
     } catch (error) {
-        res.status(500).json({ mensaje: 'Error al actualizar la tarea', error });
+        res.status(500).send({ mensaje: 'Error al actualizar la tarea', error });
     }
 };
-
+/*
 // Eliminar una tarea
 export const eliminarTarea = async (req, res) => {
     try {
@@ -49,4 +57,3 @@ export const eliminarTarea = async (req, res) => {
     }
 };
 */
-//
